@@ -63,7 +63,7 @@ class EventsRepository(private val markerDao: MarkerDao) {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 Timber.v("fetch Firebase markers: onDataChange")
                 val data = dataSnapshot.getValue<List<ClusterMarker>>()
-                offer(data)
+                trySend(data)
                 close()
             }
 
