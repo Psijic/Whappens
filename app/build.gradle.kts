@@ -73,8 +73,8 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
 
     // Tests
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    testImplementation(kotlin("test"))
+    androidTestImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
 
     implementation ("com.android.support:multidex:1.0.3")

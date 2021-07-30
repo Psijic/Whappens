@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @TypeConverters(CategoriesConverter::class)
-@Database(entities = [EventItem::class, CountryData::class], version = 15, exportSchema = false)
+@Database(entities = [EventItem::class, CountryData::class], version = 17, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract val eventsDao: EventsDao
     abstract val countriesDao: CountriesDao

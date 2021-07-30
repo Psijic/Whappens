@@ -1,21 +1,19 @@
 package com.psvoid.whappens.data
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.room.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.IgnoreExtraProperties
 import com.google.maps.android.clustering.ClusterItem
-import com.psvoid.whappens.utils.DateUtils
-import com.psvoid.whappens.utils.DateUtils.getMonthName
-import kotlinx.serialization.Serializable
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 /** A data class that implements the [ClusterItem] interface so it can be clustered. */
 @IgnoreExtraProperties
-@Serializable
 @Entity(tableName = "events_table")
+@RequiresApi(Build.VERSION_CODES.O)
 data class EventItem(
 //    @SerialName("title")
     val name: String = "Event",
@@ -29,8 +27,8 @@ data class EventItem(
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,
     val description: String? = null,
-    val priceFrom:Float? = null,
-    val priceTo:Float? = null,
+    val priceFrom: Float? = null,
+    val priceTo: Float? = null,
     @TypeConverters(CategoriesConverter::class)
     val categories: List<String> = listOf("other"),
     val popularity: Int? = null,
@@ -48,7 +46,18 @@ data class EventItem(
 //    var isFavorite: Boolean = false
 
 ) : ClusterItem {
+    companion object {
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mmXXX")
+    }
 
+
+    private fun parseDateTime(dateTime: String?): LocalDateTime? {
+        if (dateTime.isNullOrEmpty()) return null
+        return LocalDateTime.parse(dateTime, formatter)
+    }
+
+    fun getStartDt() = parseDateTime(startTime)
+    fun getEndDt() = parseDateTime(endTime)
 
     override fun getPosition() = LatLng(latitude, longitude)
     override fun getTitle() = name
@@ -63,7 +72,9 @@ data class EventItem(
 
     /**Convert date like this: "2020-05-20 20:30:00" to "17:00 - 19:00, 04 Dec" */
     fun getTimePeriod(): String {
-        return "$$startTime - $endTime"
+//        return ""
+        getStartDt()?.toLocalTime()
+        return "${getStartDt()?.toLocalDate()} - ${getEndDt()?.toLocalDate()}"
 //        if (startTime == 0L) return ""
 //
 //        val startTimeStr = DateUtils.getDateString(startTime)
@@ -106,12 +117,16 @@ object Categories {
         categories["learning_education"] = Category("Education", BitmapDescriptorFactory.HUE_AZURE)
         categories["other"] = Category("Other", BitmapDescriptorFactory.HUE_ROSE)
         categories["sports"] = Category("Sports", BitmapDescriptorFactory.HUE_GREEN)
-        categories["performing_arts"] = Category("Performing Arts", BitmapDescriptorFactory.HUE_VIOLET)
+        categories["performing_arts"] =
+            Category("Performing Arts", BitmapDescriptorFactory.HUE_VIOLET)
         categories["science"] = Category("Science", BitmapDescriptorFactory.HUE_CYAN)
-        categories["business"] = Category("Business, Networking", BitmapDescriptorFactory.HUE_MAGENTA)
+        categories["business"] =
+            Category("Business, Networking", BitmapDescriptorFactory.HUE_MAGENTA)
         categories["food"] = Category("Food", BitmapDescriptorFactory.HUE_GREEN)
-        categories["singles_social"] = Category("Nightlife, Singles", BitmapDescriptorFactory.HUE_VIOLET)
-        categories["fundraisers"] = Category("Fundraising, Charity", BitmapDescriptorFactory.HUE_MAGENTA)
+        categories["singles_social"] =
+            Category("Nightlife, Singles", BitmapDescriptorFactory.HUE_VIOLET)
+        categories["fundraisers"] =
+            Category("Fundraising, Charity", BitmapDescriptorFactory.HUE_MAGENTA)
         categories["technology"] = Category("Technology", BitmapDescriptorFactory.HUE_CYAN)
         categories["comedy"] = Category("Comedy", BitmapDescriptorFactory.HUE_VIOLET)
         categories["holiday"] = Category("Holiday", BitmapDescriptorFactory.HUE_YELLOW)
@@ -120,11 +135,15 @@ object Categories {
         categories["festivals_parades"] = Category("Festivals", BitmapDescriptorFactory.HUE_YELLOW)
         categories["movies_film"] = Category("Movie", BitmapDescriptorFactory.HUE_VIOLET)
         categories["support"] = Category("Health", BitmapDescriptorFactory.HUE_GREEN)
-        categories["outdoors_recreation"] = Category("Outdoors, Recreation", BitmapDescriptorFactory.HUE_GREEN)
-        categories["attractions"] = Category("Museums, Attractions", BitmapDescriptorFactory.HUE_VIOLET)
-        categories["conference"] = Category("Conferences, Tradeshows", BitmapDescriptorFactory.HUE_ORANGE)
+        categories["outdoors_recreation"] =
+            Category("Outdoors, Recreation", BitmapDescriptorFactory.HUE_GREEN)
+        categories["attractions"] =
+            Category("Museums, Attractions", BitmapDescriptorFactory.HUE_VIOLET)
+        categories["conference"] =
+            Category("Conferences, Tradeshows", BitmapDescriptorFactory.HUE_ORANGE)
         categories["community"] = Category("Neighborhood", BitmapDescriptorFactory.HUE_YELLOW)
-        categories["religion_spirituality"] = Category("Religion, spirituality", BitmapDescriptorFactory.HUE_YELLOW)
+        categories["religion_spirituality"] =
+            Category("Religion, spirituality", BitmapDescriptorFactory.HUE_YELLOW)
     }
 
     fun getCategory(value: List<String>): Category {
