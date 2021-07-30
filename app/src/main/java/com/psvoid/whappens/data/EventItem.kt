@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
 /** A data class that implements the [ClusterItem] interface so it can be clustered. */
 @IgnoreExtraProperties
 @Serializable
-@Entity(tableName = "markers_table")
+@Entity(tableName = "events_table")
 data class EventItem(
 //    @SerialName("title")
     val name: String = "Event",

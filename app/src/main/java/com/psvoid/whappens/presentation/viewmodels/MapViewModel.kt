@@ -42,8 +42,8 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
         get() = _period
 
     init {
-        val markerDao = AppDatabase.getInstance(application).markerDao
-        markerRepo = EventsRepository(markerDao)
+        val eventsDao = AppDatabase.getInstance(application).eventsDao
+        markerRepo = EventsRepository(eventsDao)
         val countriesDao = AppDatabase.getInstance(application).countriesDao
         countriesRepo = CountriesRepository(countriesDao)
 

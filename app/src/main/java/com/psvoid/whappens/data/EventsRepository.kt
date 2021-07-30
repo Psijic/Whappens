@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import timber.log.Timber
 
-class EventsRepository(private val markerDao: MarkerDao) {
+class EventsRepository(private val eventsDao: EventsDao) {
     private val firebaseDb: DatabaseReference = Firebase.database.reference
 
     /** Create a Coroutine scope using a job to be able to cancel when needed */
@@ -30,11 +30,11 @@ class EventsRepository(private val markerDao: MarkerDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    suspend fun getAllMarkers(): List<EventItem> = markerDao.getAllMarkers()
-    suspend fun getMarkersByCountry(countryCode: String): List<EventItem> = markerDao.getMarkersByCountry(countryCode)
+    suspend fun getAllMarkers(): List<EventItem> = eventsDao.getAllMarkers()
+    suspend fun getMarkersByCountry(countryCode: String): List<EventItem> = eventsDao.getMarkersByCountry(countryCode)
 
-    suspend fun insert(marker: EventItem) = markerDao.insert(marker)
-    suspend fun insert(markers: List<EventItem>) = markerDao.insert(markers)
+    suspend fun insert(marker: EventItem) = eventsDao.insert(marker)
+    suspend fun insert(markers: List<EventItem>) = eventsDao.insert(markers)
 
     @ExperimentalCoroutinesApi
     suspend fun fetchFirebase(countryName: String, period: EventFilter.Period): List<EventItem>? =
