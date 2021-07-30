@@ -22,30 +22,26 @@ data class ClusterMarker(
     @PrimaryKey val id: String = "",
     val url: String? = null,
     val locale: String? = null,
-//    @SerialName("image")
-//    @TypeConverters(ImagesConverter::class)
     val image: String? = null, // 250*250 or 4*3 ratio
 //    @SerialName("start_time") @PropertyName("start_time") @ColumnInfo(name = "start_time")
-    val start_time: Long = 0L,
-    val stop_time: Long? = null,
+    val startTime: String = "",
+    val endTime: String? = null,
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,
     val description: String? = null,
-    val price: String? = null,
-//    val categories: Categories? = null,
+    val priceFrom:Float? = null,
+    val priceTo:Float? = null,
     @TypeConverters(CategoriesConverter::class)
     val categories: List<String> = listOf("other"),
-//    var categories: ArrayList<String> = arrayListOf(),
-//    val popularity: String? = null,
     val popularity: Int? = null,
-//    @SerialName("venue_address")
     val address: String? = null,
-    val country_name: String = "",
-    val country_code: String = "",
+//    val country_name: String = "",
+    val countryCode: String = "",
     val city: String = "",
     val region: String? = null,
-//    val performers: Performer
-    val place: String? = null
+    val place: String? = null,
+    val currency: String? = null,
+    val postalCode: String? = null
 
     // Additional stuff
 //    var isSelected: Boolean = false,
@@ -67,23 +63,24 @@ data class ClusterMarker(
 
     /**Convert date like this: "2020-05-20 20:30:00" to "17:00 - 19:00, 04 Dec" */
     fun getTimePeriod(): String {
-        if (start_time == 0L) return ""
-
-        val startTimeStr = DateUtils.getDateString(start_time)
-        val stopTimeStr = DateUtils.getDateString(start_time)
-
-        //TODO: Add conditions for multiple days
-        val sTime = startTimeStr.substring(11, 16)
-        val month = getMonthName(startTimeStr.substring(5, 7).toInt())
-        val sDate = "${startTimeStr.substring(8, 10)} $month"
-
-        if (stopTimeStr.isNotEmpty()) {
-            sTime.plus(" - ${stopTimeStr.substring(11, 16)}")
-            val dateEnd = stopTimeStr.substring(5, 10)
-//            if (sDate != dateEnd) sDate.plus(" - $dateEnd")
-        }
-
-        return "$sTime, $sDate"
+        return "$$startTime - $endTime"
+//        if (startTime == 0L) return ""
+//
+//        val startTimeStr = DateUtils.getDateString(startTime)
+//        val stopTimeStr = DateUtils.getDateString(startTime)
+//
+//        //TODO: Add conditions for multiple days
+//        val sTime = startTimeStr.substring(11, 16)
+//        val month = getMonthName(startTimeStr.substring(5, 7).toInt())
+//        val sDate = "${startTimeStr.substring(8, 10)} $month"
+//
+//        if (stopTimeStr.isNotEmpty()) {
+//            sTime.plus(" - ${stopTimeStr.substring(11, 16)}")
+//            val dateEnd = stopTimeStr.substring(5, 10)
+////            if (sDate != dateEnd) sDate.plus(" - $dateEnd")
+//        }
+//
+//        return "$sTime, $sDate"
     }
 
 

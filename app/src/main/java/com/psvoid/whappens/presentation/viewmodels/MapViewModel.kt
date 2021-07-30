@@ -64,11 +64,11 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
             // Pass events if they in the needed date range
             val countryEvents = it.value.filter { event ->
 //                val ts = DateFormat.getDateTimeInstance().parse(event.start_time)
-                val startTime = Date(event.start_time * 1000)
-                val currentTime = Date(Config.launchTime)
+//                val startTime = Date(event.startTime * 1000)
+//                val currentTime = Date(Config.launchTime)
                 when (period.value) {
-                    EventFilter.Period.FUTURE -> startTime.after(currentTime)
-                    EventFilter.Period.TODAY -> event.start_time in (Config.launchTime..Config.launchTime - 86400000)
+//                    EventFilter.Period.FUTURE -> startTime.after(currentTime)
+//                    EventFilter.Period.TODAY -> event.startTime in (Config.launchTime..Config.launchTime - 86400000)
                     else -> true
                 }
 //                event.start_time.isNotEmpty()

@@ -33,6 +33,6 @@ interface MarkerDao {
     suspend fun getAllMarkers(): List<ClusterMarker>
 
     /** Select and returns all rows in the table. */
-    @Query("SELECT * FROM markers_table WHERE country_code = :countryCode")
+    @Query("SELECT * FROM markers_table WHERE countryCode = :countryCode")
     suspend fun getMarkersByCountry(countryCode: String): List<ClusterMarker>
 }
