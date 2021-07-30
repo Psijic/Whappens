@@ -22,8 +22,8 @@ android {
         create("release") {
         }
     }
-    compileSdkVersion (30)
-    buildToolsVersion ("30.0.3")
+    compileSdk =30
+    buildToolsVersion ="31.0.0"
 
     buildFeatures {
         viewBinding = true
@@ -31,16 +31,16 @@ android {
     }
 
     defaultConfig {
-        applicationId ("com.psvoid.whappens")
-        minSdkVersion (21)
-        targetSdkVersion (30)
-        versionCode (1)
-        versionName ("1.0")
+        applicationId ="com.psvoid.whappens"
+        minSdk =21
+        targetSdk = 30
+        versionCode =1
+        versionName ="1.0"
         multiDexEnabled = true
 
-        testInstrumentationRunner ("androidx.test.runner.AndroidJUnitRunner")
+        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
 
-        manifestPlaceholders  (mapOf("google_maps_key" to googleMapsKey))
+        manifestPlaceholders["google_maps_key"] = googleMapsKey
 //        buildConfigField ("String", "EVENTFUL_KEY", "\"$eventful_key\"")
     }
 
@@ -74,8 +74,8 @@ dependencies {
 
     // Tests
     testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
 
     implementation ("com.android.support:multidex:1.0.3")
 
@@ -83,10 +83,10 @@ dependencies {
     kapt ("com.android.databinding:compiler:3.2.0")
 
     // Material
-    implementation ("com.google.android.material:material:1.3.0")
+    implementation ("com.google.android.material:material:1.4.0")
 
-    implementation ("androidx.appcompat:appcompat:1.3.0")
-    implementation ("androidx.core:core-ktx:1.5.0")
+    implementation ("androidx.appcompat:appcompat:1.3.1")
+    implementation ("androidx.core:core-ktx:1.6.0")
 
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
@@ -112,13 +112,13 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-analytics:17.4.0'
 //    implementation 'com.google.firebase:firebase-storage:19.1.1'
 //    implementation 'com.google.firebase:firebase-messaging:20.1.6'
-    implementation ("com.google.firebase:firebase-database-ktx:20.0.0")
+    implementation ("com.google.firebase:firebase-database-ktx:20.0.1")
 //    implementation 'com.google.firebase:firebase-auth:19.3.1'
 //    implementation 'com.google.firebase:firebase-config:19.1.4'
 //    implementation 'com.firebaseui:firebase-ui-auth:6.2.1'
 
     implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
-//    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     implementation ("com.jakewharton.timber:timber:$timberVersion")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
