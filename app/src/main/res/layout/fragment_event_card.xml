@@ -8,7 +8,7 @@
 
         <variable
             name="event"
-            type="com.psvoid.whappens.data.ClusterMarker" />
+            type="com.psvoid.whappens.data.EventItem" />
     </data>
 
     <LinearLayout

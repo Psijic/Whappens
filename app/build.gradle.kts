@@ -104,7 +104,8 @@ dependencies {
     kapt ("androidx.room:room-compiler:$roomVersion")
 
     // Maps
-    implementation ("com.google.maps.android:android-maps-utils:2.2.3")
+    implementation ("com.google.maps.android:android-maps-utils:2.2.5")
+//    implementation ("com.google.maps.android:android-maps-utils-v3:2.2.5")
     implementation ("com.google.android.gms:play-services-maps:17.0.1")
     //implementation 'com.google.android.gms:play-services-location:17.0.0'
 
@@ -117,11 +118,9 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-config:19.1.4'
 //    implementation 'com.firebaseui:firebase-ui-auth:6.2.1'
 
-    implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     implementation ("com.jakewharton.timber:timber:$timberVersion")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
 }

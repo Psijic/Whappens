@@ -30,19 +30,19 @@ class EventsRepository(private val markerDao: MarkerDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    suspend fun getAllMarkers(): List<ClusterMarker> = markerDao.getAllMarkers()
-    suspend fun getMarkersByCountry(countryCode: String): List<ClusterMarker> = markerDao.getMarkersByCountry(countryCode)
+    suspend fun getAllMarkers(): List<EventItem> = markerDao.getAllMarkers()
+    suspend fun getMarkersByCountry(countryCode: String): List<EventItem> = markerDao.getMarkersByCountry(countryCode)
 
-    suspend fun insert(marker: ClusterMarker) = markerDao.insert(marker)
-    suspend fun insert(markers: List<ClusterMarker>) = markerDao.insert(markers)
+    suspend fun insert(marker: EventItem) = markerDao.insert(marker)
+    suspend fun insert(markers: List<EventItem>) = markerDao.insert(markers)
 
     @ExperimentalCoroutinesApi
-    suspend fun fetchFirebase(countryName: String, period: EventFilter.Period): List<ClusterMarker>? =
+    suspend fun fetchFirebase(countryName: String, period: EventFilter.Period): List<EventItem>? =
         suspendCancellableCoroutine {
             val listener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     Timber.v("fetch Firebase markers: onDataChange")
-                    val data = dataSnapshot.getValue<List<ClusterMarker>>()
+                    val data = dataSnapshot.getValue<List<EventItem>>()
                     it.resume(data) {}
                 }
 
@@ -58,11 +58,11 @@ class EventsRepository(private val markerDao: MarkerDao) {
         }
 
     @ExperimentalCoroutinesApi
-    fun fetchFirebaseFlow(countryName: String, period: EventFilter.Period): Flow<List<ClusterMarker>?> = callbackFlow {
+    fun fetchFirebaseFlow(countryName: String, period: EventFilter.Period): Flow<List<EventItem>?> = callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 Timber.v("fetch Firebase markers: onDataChange")
-                val data = dataSnapshot.getValue<List<ClusterMarker>>()
+                val data = dataSnapshot.getValue<List<EventItem>>()
                 trySend(data)
                 close()
             }

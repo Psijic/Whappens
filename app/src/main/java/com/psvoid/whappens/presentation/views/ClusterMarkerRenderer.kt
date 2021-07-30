@@ -8,7 +8,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
-import com.psvoid.whappens.data.ClusterMarker
+import com.psvoid.whappens.data.EventItem
 import com.psvoid.whappens.presentation.viewmodels.MapViewModel
 import timber.log.Timber
 
@@ -19,21 +19,21 @@ import timber.log.Timber
  */
 class ClusterMarkerRenderer(
     context: Context, map: GoogleMap,
-    clusterManager: ClusterManager<ClusterMarker>,
+    clusterManager: ClusterManager<EventItem>,
     private val viewModel: MapViewModel
-) : DefaultClusterRenderer<ClusterMarker>(context, map, clusterManager) {
+) : DefaultClusterRenderer<EventItem>(context, map, clusterManager) {
 
-    override fun onBeforeClusterItemRendered(item: ClusterMarker, markerOptions: MarkerOptions) {
+    override fun onBeforeClusterItemRendered(item: EventItem, markerOptions: MarkerOptions) {
         markerOptions.icon(getMarkerColor(item))
         Timber.v("onBeforeClusterItemRendered")
     }
 
-    override fun onClusterItemUpdated(item: ClusterMarker, marker: Marker) {
+    override fun onClusterItemUpdated(item: EventItem, marker: Marker) {
         marker.setIcon(getMarkerColor(item))
         Timber.v("onClusterItemUpdated")
     }
 
-    private fun getMarkerColor(item: ClusterMarker): BitmapDescriptor {
+    private fun getMarkerColor(item: EventItem): BitmapDescriptor {
         val color = if (item.id == viewModel.selectedEvent.value?.id) BitmapDescriptorFactory.HUE_ORANGE
         else item.getCategoryColor()
         return BitmapDescriptorFactory.defaultMarker(color)

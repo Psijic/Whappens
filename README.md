@@ -1,7 +1,7 @@
 # Whappens
 
 ## Description
-Android application to find events around you. Uses ```Google Maps, Firebase, Retrofit, Glide, AndroidX```.
+Android application to find events around you. Uses ```Google Maps, Firebase, Glide, AndroidX```.
 
 ![Screenshot](screenshot.png)
 

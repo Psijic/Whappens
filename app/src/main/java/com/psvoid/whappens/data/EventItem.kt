@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
 @IgnoreExtraProperties
 @Serializable
 @Entity(tableName = "markers_table")
-data class ClusterMarker(
+data class EventItem(
 //    @SerialName("title")
     val name: String = "Event",
     @PrimaryKey val id: String = "",

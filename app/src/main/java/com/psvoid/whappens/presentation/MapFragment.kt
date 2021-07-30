@@ -31,7 +31,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.collections.MarkerManager
 import com.psvoid.whappens.R
-import com.psvoid.whappens.data.ClusterMarker
+import com.psvoid.whappens.data.EventItem
 import com.psvoid.whappens.data.EventFilter
 import com.psvoid.whappens.data.network.Config
 import com.psvoid.whappens.databinding.FragmentMapBinding
@@ -48,7 +48,7 @@ class MapFragment : BaseFragment() {
     private var isRestore = false
 
     private lateinit var map: GoogleMap
-    private lateinit var clusterManager: ClusterManager<ClusterMarker>
+    private lateinit var clusterManager: ClusterManager<EventItem>
     private lateinit var binding: FragmentMapBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -237,7 +237,7 @@ class MapFragment : BaseFragment() {
     }
 
     /** Called when the user clicks a ClusterMarker.  */
-    private fun onClusterItemClick(item: ClusterMarker): Boolean {
+    private fun onClusterItemClick(item: EventItem): Boolean {
         viewModel.selectedEvent.postValue(item)
         binding.event = item
 

@@ -13,15 +13,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.*
 import kotlin.collections.set
 
-typealias MarkersMap = MutableMap<String, List<ClusterMarker>>
+typealias MarkersMap = MutableMap<String, List<EventItem>>
 
 class MapViewModel(application: Application) : AndroidViewModel(application) {
-    val algorithm = NonHierarchicalViewBasedAlgorithm<ClusterMarker>(0, 0)
+    val algorithm = NonHierarchicalViewBasedAlgorithm<EventItem>(0, 0)
 
-    val selectedEvent = MutableLiveData<ClusterMarker>()
+    val selectedEvent = MutableLiveData<EventItem>()
     var isHideUI = MutableLiveData(false)
 //    var bottomSheetState = BottomSheetBehavior.STATE_HIDDEN // TODO: save height expanded?
 
@@ -119,14 +118,14 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
     /** Add specific settings like event types selected */
     fun fetchEvents(lat: Double, lng: Double, radius: Float) {}
 
-    private fun saveMarkers(countryName: String, markers: List<ClusterMarker>) {
+    private fun saveMarkers(countryName: String, markers: List<EventItem>) {
         Timber.i("Saving $countryName markers into DB")
         insertMarkers(markers)
         insertCountry(CountryData(countryName))
     }
 
     /** Launching a new coroutine to insert the data in a non-blocking way */
-    private fun insertMarkers(markers: List<ClusterMarker>) =
+    private fun insertMarkers(markers: List<EventItem>) =
         viewModelScope.launch(Dispatchers.IO) { markerRepo.insert(markers) }
 
     private fun insertCountries(countries: List<CountryData>) =
@@ -135,7 +134,7 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
     private fun insertCountry(country: CountryData) =
         viewModelScope.launch(Dispatchers.IO) { countriesRepo.insert(country) }
 
-    private fun addClusterItems(items: List<ClusterMarker>?) {
+    private fun addClusterItems(items: List<EventItem>?) {
         if (items.isNullOrEmpty()) {
             _clusterStatus.postValue(LoadingStatus.ERROR)
         } else {

@@ -12,7 +12,7 @@ import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.google.maps.android.ui.IconGenerator
 import com.psvoid.whappens.R
-import com.psvoid.whappens.data.ClusterMarker
+import com.psvoid.whappens.data.EventItem
 
 /**
  * Draws profile images inside markers (using IconGenerator).
@@ -21,10 +21,10 @@ import com.psvoid.whappens.data.ClusterMarker
 class ClusterMarkerRendererPhoto(
     private val context: Context,
     map: GoogleMap,
-    clusterManager: ClusterManager<ClusterMarker>,
+    clusterManager: ClusterManager<EventItem>,
     resources: Resources
 ) :
-    DefaultClusterRenderer<ClusterMarker>(context, map, clusterManager) {
+    DefaultClusterRenderer<EventItem>(context, map, clusterManager) {
     private val iconGenerator = IconGenerator(context)
 
     //    val clusterIconGenerator = IconGenerator(context)
@@ -45,7 +45,7 @@ class ClusterMarkerRendererPhoto(
 
     }
 
-    override fun onBeforeClusterItemRendered(marker: ClusterMarker, markerOptions: MarkerOptions) {
+    override fun onBeforeClusterItemRendered(marker: EventItem, markerOptions: MarkerOptions) {
         loadImage(marker)
 
         // Draw a single marker - show their profile photo and set the info window to show their name
@@ -60,14 +60,14 @@ class ClusterMarkerRendererPhoto(
      * @param marker ClusterMarker to return an BitmapDescriptor for
      * @return the marker's profile photo as a BitmapDescriptor
      */
-    private fun getItemIcon(marker: ClusterMarker): BitmapDescriptor {
+    private fun getItemIcon(marker: EventItem): BitmapDescriptor {
         imageView.setImageResource(R.drawable.john) //TODO: change to image
 //        mImageView.setImageResource(marker.image)
         val icon = iconGenerator.makeIcon()
         return BitmapDescriptorFactory.fromBitmap(icon)
     }
 
-    private fun loadImage(marker: ClusterMarker) {
+    private fun loadImage(marker: EventItem) {
 
         //TODO: finish
 //        val imgUrl = marker.images?.thumb?.url

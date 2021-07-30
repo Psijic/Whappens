@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 import java.util.*
 
 //@IgnoreExtraProperties
-//@Serializable
+@Serializable
 data class StreetEvent(
     val name: String,
     val type: String,
@@ -33,7 +33,6 @@ data class Links(
     val urls: List<String>
 )
 
-@Serializable
 data class Classification(
     val primary: Boolean,
     val family: Boolean,
@@ -44,7 +43,6 @@ data class Classification(
     val subType: IdName
 )
 
-@Serializable
 data class IdName(
     val id: String = "",
     val name: String = ""
@@ -56,7 +54,6 @@ data class Price(
     val currency: String
 )
 
-@Serializable
 data class EventImage(
     val url: String = "",
     val width: String = "",
