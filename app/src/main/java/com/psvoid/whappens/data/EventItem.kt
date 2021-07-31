@@ -2,7 +2,10 @@ package com.psvoid.whappens.data
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.IgnoreExtraProperties
@@ -51,13 +54,11 @@ data class EventItem(
     }
 
 
-    private fun parseDateTime(dateTime: String?): LocalDateTime? {
-        if (dateTime.isNullOrEmpty()) return null
-        return LocalDateTime.parse(dateTime, formatter)
-    }
+    private fun parseDateTime(dateTime: String): LocalDateTime =
+        LocalDateTime.parse(dateTime, formatter)
 
     fun getStartDt() = parseDateTime(startTime)
-    fun getEndDt() = parseDateTime(endTime)
+    fun getEndDt() = endTime?.let { parseDateTime(it) }
 
     override fun getPosition() = LatLng(latitude, longitude)
     override fun getTitle() = name
@@ -70,33 +71,19 @@ data class EventItem(
     fun getCategoryColor() = Categories.getCategory(categories).color
     fun getCategoryName() = Categories.getCategory(categories).name
 
-    /**Convert date like this: "2020-05-20 20:30:00" to "17:00 - 19:00, 04 Dec" */
+    /**Convert date like "2021-08-02T17:00-10:45" to "17:00 - 19:00, 04 Dec" */
     fun getTimePeriod(): String {
-//        return ""
-        getStartDt()?.toLocalTime()
-        return "${getStartDt()?.toLocalDate()} - ${getEndDt()?.toLocalDate()}"
-//        if (startTime == 0L) return ""
-//
-//        val startTimeStr = DateUtils.getDateString(startTime)
-//        val stopTimeStr = DateUtils.getDateString(startTime)
-//
-//        //TODO: Add conditions for multiple days
-//        val sTime = startTimeStr.substring(11, 16)
-//        val month = getMonthName(startTimeStr.substring(5, 7).toInt())
-//        val sDate = "${startTimeStr.substring(8, 10)} $month"
-//
-//        if (stopTimeStr.isNotEmpty()) {
-//            sTime.plus(" - ${stopTimeStr.substring(11, 16)}")
-//            val dateEnd = stopTimeStr.substring(5, 10)
-////            if (sDate != dateEnd) sDate.plus(" - $dateEnd")
-//        }
-//
-//        return "$sTime, $sDate"
+        val startTime = getStartDt()
+        val endTime = getEndDt()
+        return if (endTime != null) {
+            val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+            val dateFormatter = DateTimeFormatter.ofPattern("dd MMM")
+            "${startTime.format(timeFormatter)} - ${endTime.format(timeFormatter)}, ${
+                startTime.format(dateFormatter)
+            }"
+            //TODO: Add conditions for multiple days, support for API < 26
+        } else getStartDt().format(DateTimeFormatter.ofPattern("HH:mm, dd MMM"))
     }
-
-
-    //@Serializable
-    //data class Performer(val performer: List<IdName>)
 }
 
 class CategoriesConverter {
