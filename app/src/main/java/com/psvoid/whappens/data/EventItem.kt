@@ -2,14 +2,12 @@ package com.psvoid.whappens.data
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.IgnoreExtraProperties
 import com.google.maps.android.clustering.ClusterItem
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -49,16 +47,20 @@ data class EventItem(
 //    var isFavorite: Boolean = false
 
 ) : ClusterItem {
-    companion object {
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mmXXX")
+    private companion object {
+        val formatterDt: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mmXXX")
+        val formatterTime: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     }
 
 
-    private fun parseDateTime(dateTime: String): LocalDateTime =
-        LocalDateTime.parse(dateTime, formatter)
+    private fun parseDateTime(dateTime: String): LocalDateTime = if (dateTime.length > 10)
+        LocalDateTime.parse(dateTime, formatterDt) else LocalDate.parse(dateTime, formatterTime).atStartOfDay()
 
-    fun getStartDt() = parseDateTime(startTime)
-    fun getEndDt() = endTime?.let { parseDateTime(it) }
+    @Ignore
+    val startDt = lazy { parseDateTime(startTime) }
+
+    @Ignore
+    val endDt = lazy { endTime?.let { parseDateTime(it) } }
 
     override fun getPosition() = LatLng(latitude, longitude)
     override fun getTitle() = name
@@ -73,16 +75,14 @@ data class EventItem(
 
     /**Convert date like "2021-08-02T17:00-10:45" to "17:00 - 19:00, 04 Dec" */
     fun getTimePeriod(): String {
-        val startTime = getStartDt()
-        val endTime = getEndDt()
-        return if (endTime != null) {
+        return if (endDt.value != null) {
             val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
             val dateFormatter = DateTimeFormatter.ofPattern("dd MMM")
-            "${startTime.format(timeFormatter)} - ${endTime.format(timeFormatter)}, ${
-                startTime.format(dateFormatter)
+            "${startDt.value.format(timeFormatter)} - ${endDt.value?.format(timeFormatter)}, ${
+                startDt.value.format(dateFormatter)
             }"
             //TODO: Add conditions for multiple days, support for API < 26
-        } else getStartDt().format(DateTimeFormatter.ofPattern("HH:mm, dd MMM"))
+        } else startDt.value.format(DateTimeFormatter.ofPattern("HH:mm, dd MMM"))
     }
 }
 

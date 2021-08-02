@@ -2,8 +2,8 @@ package com.psvoid.whappens.data
 
 import com.psvoid.whappens.data.Categories.getCategory
 import com.psvoid.whappens.utils.DateUtils
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class DataTest {
 

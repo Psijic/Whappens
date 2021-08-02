@@ -60,10 +60,10 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
         _clusterStatus.value = LoadingStatus.DONE
 
         allMarkers.forEach {
-            // Pass events if they in the needed date range
+            // Pass events if they in the actual date range
             val countryEvents = it.value.filter { event ->
-//                val ts = DateFormat.getDateTimeInstance().parse(event.start_time)
-//                val startTime = Date(event.startTime * 1000)
+//                val ts = DateFormat.getDateTimeInstance().parse(event.startTime)
+//                val startTime = LocalDate.of(event.startTime * 1000)
 //                val currentTime = Date(Config.launchTime)
                 when (period.value) {
 //                    EventFilter.Period.FUTURE -> startTime.after(currentTime)
@@ -93,7 +93,7 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
                     period.value?.let { fetchMarkers(countryName, it) }
                     //                    markers = markerRepo.fetchFirebase(countryName, period)
                 } else {
-                    Timber.d("Add markers from a cache")
+                    Timber.d("Add markers from cache")
                     addClusterItems(markers)
                 }
             }

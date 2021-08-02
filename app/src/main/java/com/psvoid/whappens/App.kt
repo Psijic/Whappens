@@ -1,15 +1,24 @@
 package com.psvoid.whappens
 
 import android.app.Application
+import android.content.Context
+import android.telephony.TelephonyManager
+import com.psvoid.whappens.data.network.Config
 import timber.log.Timber
 
 class App : Application() {
+
     override fun onCreate() {
         super.onCreate()
 
         Timber.plant(if (BuildConfig.DEBUG) Timber.DebugTree() else CrashReportingTree())
         //        FirebaseApp.initializeApp(this)
 
+        val tm = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+//        val countryCode = tm.networkCountryIso.uppercase()
+        val countryCode = "RU"
+        Config.countries.add(countryCode)
+        Timber.i("Network country code: $countryCode")
     }
 }
 
