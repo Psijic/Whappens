@@ -3,7 +3,7 @@ package com.psvoid.whappens
 import android.app.Application
 import android.content.Context
 import android.telephony.TelephonyManager
-import com.psvoid.whappens.data.network.Config
+import com.psvoid.whappens.data.Config
 import timber.log.Timber
 
 class App : Application() {
@@ -16,7 +16,7 @@ class App : Application() {
 
         val tm = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 //        val countryCode = tm.networkCountryIso.uppercase()
-        val countryCode = "RU"
+        val countryCode = "DE"
         Config.countries.add(countryCode)
         Timber.i("Network country code: $countryCode")
     }

@@ -1,13 +1,15 @@
 package com.psvoid.whappens.presentation.viewmodels
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.maps.android.clustering.algo.NonHierarchicalViewBasedAlgorithm
 import com.psvoid.whappens.data.*
-import com.psvoid.whappens.data.network.Config
+import com.psvoid.whappens.data.Config.today
 import com.psvoid.whappens.utils.LoadingStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,6 +19,7 @@ import kotlin.collections.set
 
 typealias MarkersMap = MutableMap<String, List<EventItem>>
 
+@RequiresApi(Build.VERSION_CODES.O)
 class MapViewModel(application: Application) : AndroidViewModel(application) {
     val algorithm = NonHierarchicalViewBasedAlgorithm<EventItem>(0, 0)
 
@@ -53,24 +56,17 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
     /** Here we set the period of shown cached markers */
     fun setPeriod(value: EventFilter.Period) {
         _period.value = value
-
-//        val today = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-
         algorithm.clearItems()
         _clusterStatus.value = LoadingStatus.DONE
 
         allMarkers.forEach {
-            // Pass events if they in the actual date range
+            // Pass events if they are in the actual date range
             val countryEvents = it.value.filter { event ->
-//                val ts = DateFormat.getDateTimeInstance().parse(event.startTime)
-//                val startTime = LocalDate.of(event.startTime * 1000)
-//                val currentTime = Date(Config.launchTime)
                 when (period.value) {
-//                    EventFilter.Period.FUTURE -> startTime.after(currentTime)
-//                    EventFilter.Period.TODAY -> event.startTime in (Config.launchTime..Config.launchTime - 86400000)
+                    EventFilter.Period.FUTURE -> event.startDt.value.nano > System.currentTimeMillis()
+                    EventFilter.Period.TODAY -> event.startDt.value.dayOfYear == today.dayOfYear
                     else -> true
                 }
-//                event.start_time.isNotEmpty()
             }
 
             addClusterItems(countryEvents)

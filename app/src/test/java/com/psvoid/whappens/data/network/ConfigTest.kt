@@ -1,9 +1,9 @@
 package com.psvoid.whappens.data.network
 
+import com.psvoid.whappens.data.Config
 import com.psvoid.whappens.data.CountryData
+import org.junit.Assert.assertTrue
 import org.junit.Test
-
-import org.junit.Assert.*
 import java.util.*
 
 class ConfigTest {

@@ -31,9 +31,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.collections.MarkerManager
 import com.psvoid.whappens.R
-import com.psvoid.whappens.data.EventItem
+import com.psvoid.whappens.data.Config
 import com.psvoid.whappens.data.EventFilter
-import com.psvoid.whappens.data.network.Config
+import com.psvoid.whappens.data.EventItem
 import com.psvoid.whappens.databinding.FragmentMapBinding
 import com.psvoid.whappens.presentation.viewmodels.MapViewModel
 import com.psvoid.whappens.presentation.views.ClusterMarkerRenderer
