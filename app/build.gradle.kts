@@ -16,6 +16,7 @@ val fragmentVersion: String by project
 val timberVersion: String by project
 val coroutinesVersion: String by project
 val navigation: String by project
+val composeVersion: String by project
 
 android {
     signingConfigs {
@@ -28,20 +29,22 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = composeVersion
     }
 
     defaultConfig {
         applicationId = "com.psvoid.whappens"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 31
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
         manifestPlaceholders["google_maps_key"] = googleMapsKey
-//        buildConfigField ("String", "EVENTFUL_KEY", "\"$eventful_key\"")
     }
 
     buildTypes {
@@ -77,10 +80,10 @@ dependencies {
     androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
-    implementation("com.android.support:multidex:1.0.3")
+    implementation("androidx.multidex:multidex:2.0.1")
 
     // Data binding
-    kapt("com.android.databinding:compiler:3.2.0")
+    kapt("androidx.databinding:databinding-compiler:7.0.0")
 
     // Material
     implementation("com.google.android.material:material:1.4.0")
@@ -122,5 +125,17 @@ dependencies {
 
     implementation("com.jakewharton.timber:timber:$timberVersion")
     implementation("com.github.bumptech.glide:glide:4.12.0")
+
+    // Compose
+    implementation("androidx.compose.runtime:runtime:$composeVersion")
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.foundation:foundation:$composeVersion")
+    implementation("androidx.compose.foundation:foundation-layout:$composeVersion")
+    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
+    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
+    implementation("com.google.android.material:compose-theme-adapter:$composeVersion")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-beta01")
+    implementation("com.google.accompanist:accompanist-insets:0.14.0")
 
 }
