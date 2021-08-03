@@ -53,7 +53,8 @@ class MapFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 //        = ComposeView(requireContext()).apply {
-//            binding = FragmentMapBinding.inflate(inflater, container, false).apply {
+        binding = FragmentMapBinding.inflate(inflater, container, false)
+//                .apply {
 //                setContent {
 //                    MaterialTheme {
 //                        TimeSelectDialog()
@@ -286,14 +287,14 @@ class MapFragment : BaseFragment() {
                     val dialog = MaterialAlertDialogBuilder(requireContext())
                         .setView(R.layout.fragment_dialog)
                         .show()
-//                    dialog.findViewById<MaterialButton>(R.id.button_range)?.setOnClickListener {
-//                        dialog.dismiss()
-//                        showDatePicker()
-//                    }
-//                    setDialogAction(dialog, R.id.button_future, EventFilter.Period.FUTURE)
-//                    setDialogAction(dialog, R.id.button_today, EventFilter.Period.TODAY)
-//                    setDialogAction(dialog, R.id.button_week, EventFilter.Period.WEEK)
-//                    setDialogAction(dialog, R.id.button_month, EventFilter.Period.MONTH)
+                    dialog.findViewById<MaterialButton>(R.id.button_range)?.setOnClickListener {
+                        dialog.dismiss()
+                        showDatePicker()
+                    }
+                    setDialogAction(dialog, R.id.button_future, EventFilter.Period.FUTURE)
+                    setDialogAction(dialog, R.id.button_today, EventFilter.Period.TODAY)
+                    setDialogAction(dialog, R.id.button_week, EventFilter.Period.WEEK)
+                    setDialogAction(dialog, R.id.button_month, EventFilter.Period.MONTH)
 
                     true
                 }
