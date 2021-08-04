@@ -16,14 +16,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.android.material.composethemeadapter.MdcTheme
 import com.psvoid.whappens.R
 
 @Composable
 fun TimeSelectDialog() {
 
     val mainButtonColor = ButtonDefaults.buttonColors(
-        backgroundColor = colorResource(id = R.color.primaryLightColor)
+        backgroundColor = colorResource(id = R.color.primaryLightColor),
+        contentColor = colorResource(id = R.color.secondaryTextColor)
     )
     Column {
         OutlinedButton(
@@ -129,8 +129,8 @@ private fun getString(@StringRes resId: Int) = LocalContext.current.getString(re
 @Composable
 private fun TimeSelectDialogPreview() {
     ProvideWindowInsets {
-        MdcTheme {
-            TimeSelectDialog()
-        }
+//        MdcTheme {
+        TimeSelectDialog()
+//        }
     }
 }

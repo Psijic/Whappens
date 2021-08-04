@@ -137,5 +137,6 @@ dependencies {
     implementation("com.google.android.material:compose-theme-adapter:$composeVersion")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-beta01")
     implementation("com.google.accompanist:accompanist-insets:0.14.0")
+    implementation("androidx.activity:activity-compose:1.3.0")
 
 }

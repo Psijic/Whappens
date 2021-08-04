@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/category"
-        android:icon="@drawable/ic_domain_white_24dp"
+        android:icon="@drawable/ic_domain_24dp"
         android:title="@string/category"
         app:showAsAction="always" />
 
@@ -22,7 +22,7 @@
 
     <item
         android:id="@+id/list"
-        android:icon="@drawable/ic_baseline_list_alt_24"
+        android:icon="@drawable/ic_list_alt_24"
         android:title="@string/list"
         app:showAsAction="always" />
 

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/countries"
-        android:icon="@drawable/ic_domain_white_24dp"
+        android:icon="@drawable/ic_domain_24dp"
         android:title="@string/countries" />
 
     <item
