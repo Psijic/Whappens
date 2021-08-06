@@ -14,15 +14,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.material.MaterialTheme
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.maps.CameraUpdateFactory
+import com.google.android.libraries.maps.GoogleMap
+import com.google.android.libraries.maps.model.BitmapDescriptorFactory
+import com.google.android.libraries.maps.model.LatLng
+import com.google.android.libraries.maps.model.MapStyleOptions
+import com.google.android.libraries.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -38,6 +39,8 @@ import com.psvoid.whappens.databinding.FragmentMapBinding
 import com.psvoid.whappens.presentation.viewmodels.MapViewModel
 import com.psvoid.whappens.presentation.views.ClusterMarkerRenderer
 import com.psvoid.whappens.presentation.views.ClusterMarkerRendererPhoto
+import com.psvoid.whappens.presentation.views.compose.FragmentMap
+import com.psvoid.whappens.presentation.views.compose.gMapAsync
 import com.psvoid.whappens.utils.LoadingStatus
 import timber.log.Timber
 import kotlin.math.pow
@@ -51,37 +54,37 @@ class MapFragment : BaseFragment() {
     private lateinit var clusterManager: ClusterManager<EventItem>
     private lateinit var binding: FragmentMapBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-//        = ComposeView(requireContext()).apply {
-        binding = FragmentMapBinding.inflate(inflater, container, false)
-//                .apply {
-//                setContent {
-//                    MaterialTheme {
-//                        TimeSelectDialog()
-//                    }
-//                }
-//            }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        ComposeView(requireContext()).apply {
+            setContent {
+                MaterialTheme {
+                    FragmentMap()
+                }
+            }
 
-        isRestore = savedInstanceState != null
-        setupMap()
-        setupTopAppBar()
-        return binding.root
-    }
+            isRestore = savedInstanceState != null
+
+            gMapAsync.observe(viewLifecycleOwner) {
+                map = it
+                setupMap()
+            }
+//        setupTopAppBar()
+        }
 
     private fun setupMap() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync { map ->
-            this.map = map
+//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+//        gMap.getMapAsync { map ->
+//            this.map = map
 
-            setupMapLayers()
-            setupBinds()
-            if (Config.mapStyle > 0) setMapStyle(map, Config.mapStyle)
-            enableLocation()
-            setupMapButtons()
-            setupRestore()
-            setupActions()
-            start()
-        }
+        setupMapLayers()
+//        setupBinds()
+        if (Config.mapStyle > 0) setMapStyle(map, Config.mapStyle)
+        enableLocation()
+        setupMapButtons()
+        setupRestore()
+        setupActions()
+        start()
+//        }
     }
 
     private fun setupBinds() {

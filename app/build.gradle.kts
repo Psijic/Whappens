@@ -94,7 +94,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
 
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     implementation("androidx.fragment:fragment-ktx:$fragmentVersion")
 
     // Navigation
@@ -107,10 +107,16 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
 
     // Maps
-    implementation("com.google.maps.android:android-maps-utils:2.2.5")
-//    implementation ("com.google.maps.android:android-maps-utils-v3:2.2.5")
-    implementation("com.google.android.gms:play-services-maps:17.0.1")
+    implementation("com.google.android.libraries.maps:maps:3.0.0")
+    implementation("com.google.maps.android:maps-v3-ktx:2.2.0")
+    implementation("com.android.volley:volley:1.2.0")
+//    implementation("com.google.maps.android:android-maps-utils:2.2.5")
+    implementation("com.google.maps.android:android-maps-utils-v3:2.2.5")
+//    implementation("com.google.android.gms:play-services-maps:17.0.1")
     //implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+
+    implementation("com.google.dagger:hilt-android:2.38.1")
 
     // Firebase
 //    implementation 'com.google.firebase:firebase-analytics:17.4.0'
@@ -135,8 +141,8 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("com.google.android.material:compose-theme-adapter:$composeVersion")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-beta01")
-    implementation("com.google.accompanist:accompanist-insets:0.14.0")
-    implementation("androidx.activity:activity-compose:1.3.0")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02")
+    implementation("com.google.accompanist:accompanist-insets:0.16.0")
+    implementation("androidx.activity:activity-compose:1.3.1")
 
 }

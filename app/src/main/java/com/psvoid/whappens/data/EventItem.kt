@@ -3,8 +3,8 @@ package com.psvoid.whappens.data
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.*
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.maps.model.BitmapDescriptorFactory
+import com.google.android.libraries.maps.model.LatLng
 import com.google.firebase.database.IgnoreExtraProperties
 import com.google.maps.android.clustering.ClusterItem
 import java.time.LocalDate

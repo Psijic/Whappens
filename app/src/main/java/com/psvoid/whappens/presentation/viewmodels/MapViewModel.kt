@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.libraries.maps.GoogleMap
 import com.google.maps.android.clustering.algo.NonHierarchicalViewBasedAlgorithm
 import com.psvoid.whappens.data.*
 import com.psvoid.whappens.data.Config.today
@@ -31,6 +32,8 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
     private val _clusterStatus = MutableLiveData<LoadingStatus>()
     val clusterStatus: LiveData<LoadingStatus>
         get() = _clusterStatus
+
+    val gMapAsync = MutableLiveData<GoogleMap>()
 
     private val markerRepo: EventsRepository
     private val countriesRepo: CountriesRepository
