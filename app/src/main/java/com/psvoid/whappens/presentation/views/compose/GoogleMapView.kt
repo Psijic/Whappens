@@ -13,12 +13,16 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.libraries.maps.GoogleMap
 import com.google.android.libraries.maps.MapView
 import com.psvoid.whappens.R
+import com.psvoid.whappens.presentation.viewmodels.MapViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 internal val gMapAsync = MutableLiveData<GoogleMap>()
 
 @Composable
 fun GoogleMapViewContainer(
+    viewModel: MapViewModel = viewModel()
 ) {
+
     val map = rememberMapViewWithLifecycle()
     AndroidView({ map }) { mapView: MapView ->
         mapView.getMapAsync {

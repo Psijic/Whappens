@@ -3,15 +3,13 @@ package com.psvoid.whappens.presentation.viewmodels
 import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.google.android.libraries.maps.GoogleMap
 import com.google.maps.android.clustering.algo.NonHierarchicalViewBasedAlgorithm
 import com.psvoid.whappens.data.*
 import com.psvoid.whappens.data.Config.today
 import com.psvoid.whappens.utils.LoadingStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -21,6 +19,7 @@ import kotlin.collections.set
 typealias MarkersMap = MutableMap<String, List<EventItem>>
 
 @RequiresApi(Build.VERSION_CODES.O)
+//@HiltViewModel
 class MapViewModel(application: Application) : AndroidViewModel(application) {
     val algorithm = NonHierarchicalViewBasedAlgorithm<EventItem>(0, 0)
 
@@ -32,8 +31,6 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
     private val _clusterStatus = MutableLiveData<LoadingStatus>()
     val clusterStatus: LiveData<LoadingStatus>
         get() = _clusterStatus
-
-    val gMapAsync = MutableLiveData<GoogleMap>()
 
     private val markerRepo: EventsRepository
     private val countriesRepo: CountriesRepository
