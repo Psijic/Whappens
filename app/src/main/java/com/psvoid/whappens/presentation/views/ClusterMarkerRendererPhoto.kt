@@ -61,7 +61,7 @@ class ClusterMarkerRendererPhoto(
      * @return the marker's profile photo as a BitmapDescriptor
      */
     private fun getItemIcon(marker: EventItem): BitmapDescriptor {
-        imageView.setImageResource(R.drawable.john) //TODO: change to image
+        imageView.setImageResource(R.drawable.ic_cake_white_24dp) //TODO: change to image
 //        mImageView.setImageResource(marker.image)
         val icon = iconGenerator.makeIcon()
         return BitmapDescriptorFactory.fromBitmap(icon)
