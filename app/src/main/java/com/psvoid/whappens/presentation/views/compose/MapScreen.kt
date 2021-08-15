@@ -1,9 +1,6 @@
 package com.psvoid.whappens.presentation.views.compose
 
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
@@ -15,13 +12,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.psvoid.whappens.R
 
+@ExperimentalMaterialApi
 @Composable
 fun MapScreen() {
-    TopAppBar()
+    //TopAppBar()
+    EventBottomDialog()
 }
 
+@ExperimentalMaterialApi
 @Composable
-private fun TopAppBar() {
+fun TopAppBar() {
     val result = remember { mutableStateOf("") }
 
     Scaffold(topBar = {
@@ -54,11 +54,17 @@ private fun TopAppBar() {
                 }
             },
         )
-    }) {
-        MapViewContainer()
+    })
+    {
+//        ModalBottomSheetLayout(modifier = Modifier.padding(it), sheetState = sheetState, sheetContent = {
+//            EventBottomDialog()
+//        }) {
+            MapViewContainer()
+//        }
     }
 }
 
+@ExperimentalMaterialApi
 @Preview
 @Composable
 private fun FragmentMapPreview() {

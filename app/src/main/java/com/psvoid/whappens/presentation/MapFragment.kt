@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
@@ -31,9 +32,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.collections.MarkerManager
 import com.psvoid.whappens.R
-import com.psvoid.whappens.data.Config
 import com.psvoid.whappens.data.EventFilter
 import com.psvoid.whappens.data.EventItem
+import com.psvoid.whappens.data.network.Config
 import com.psvoid.whappens.databinding.FragmentMapBinding
 import com.psvoid.whappens.presentation.themes.MainTheme
 import com.psvoid.whappens.presentation.viewmodels.MapViewModel
@@ -54,6 +55,7 @@ class MapFragment : BaseFragment() {
     private lateinit var clusterManager: ClusterManager<EventItem>
     private lateinit var binding: FragmentMapBinding
 
+    @ExperimentalMaterialApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         ComposeView(requireContext()).apply {
             setContent {

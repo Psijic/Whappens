@@ -1,7 +1,8 @@
-package com.psvoid.whappens.data
+package com.psvoid.whappens.data.network
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.psvoid.whappens.data.EventFilter
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
