@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.psvoid.whappens.R
 
 @Composable
-fun FragmentMap() {
+fun MapScreen() {
     TopAppBar()
 }
 
@@ -54,13 +54,13 @@ private fun TopAppBar() {
                 }
             },
         )
-    }, content = {
-        GoogleMapViewContainer()
-    })
+    }) {
+        MapViewContainer()
+    }
 }
 
 @Preview
 @Composable
 private fun FragmentMapPreview() {
-    FragmentMap()
+    MapScreen()
 }

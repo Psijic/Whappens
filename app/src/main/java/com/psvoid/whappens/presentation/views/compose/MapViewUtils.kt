@@ -6,30 +6,10 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.MutableLiveData
-import com.google.android.libraries.maps.GoogleMap
 import com.google.android.libraries.maps.MapView
 import com.psvoid.whappens.R
-import com.psvoid.whappens.presentation.viewmodels.MapViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-
-internal val gMapAsync = MutableLiveData<GoogleMap>()
-
-@Composable
-fun GoogleMapViewContainer(
-    viewModel: MapViewModel = viewModel()
-) {
-
-    val map = rememberMapViewWithLifecycle()
-    AndroidView({ map }) { mapView: MapView ->
-        mapView.getMapAsync {
-            gMapAsync.value = it
-        }
-    }
-}
 
 /**
  * Remembers a MapView and gives it the lifecycle of the current LifecycleOwner
