@@ -32,7 +32,7 @@ android {
 
     defaultConfig {
         applicationId = "com.psvoid.whappens"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 31
         versionCode = 1
         versionName = "1.0"
