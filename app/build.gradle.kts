@@ -17,6 +17,7 @@ val timberVersion: String by project
 val coroutinesVersion: String by project
 val navigation: String by project
 val composeVersion: String by project
+val androidGradlePluginVersion: String by project
 
 android {
     signingConfigs {
@@ -77,13 +78,13 @@ dependencies {
 
     // Tests
     testImplementation(kotlin("test"))
-    androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     implementation("androidx.multidex:multidex:2.0.1")
 
     // Data binding
-    kapt("androidx.databinding:databinding-compiler:7.0.0")
+    kapt("androidx.databinding:databinding-compiler:$androidGradlePluginVersion")
 
     // Material
     implementation("com.google.android.material:material:1.4.0")
