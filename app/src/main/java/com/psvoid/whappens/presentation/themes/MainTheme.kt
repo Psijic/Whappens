@@ -44,8 +44,8 @@ private val darkColors = darkColors(
     onSecondary = Color(0xFFF1F1F1),
     onBackground = Color.White,
     onSurface = Color.White,
-    onError = Color.White
-//    background = Color(0xFF121212),
+    onError = Color.White,
+    background = Color(0xFF000051),
 //    surface = Color(0xFF121212),
 //    error = Color(0xFFCF6679)
 )
@@ -55,6 +55,7 @@ private val lightColors = lightColors(
     primaryVariant = Color(0xFF534BAE),
     secondary = Color(0xFFC2185B),
     secondaryVariant = Color(0xFFFA5788),
+    background = Color(0xFF1A237E),
 )
 
 @Composable

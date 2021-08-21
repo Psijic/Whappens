@@ -148,6 +148,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
 
     // Compose extra
+    implementation ("androidx.compose.material:material-icons-extended:$composeVersion")
     implementation("io.github.a914-gowtham:compose-ratingbar:1.1.0")
+    implementation ("io.coil-kt:coil-compose:1.3.0")
 
 }
