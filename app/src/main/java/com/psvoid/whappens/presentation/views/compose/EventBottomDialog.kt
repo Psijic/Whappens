@@ -14,6 +14,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Domain
@@ -27,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,7 +57,18 @@ fun EventBottomDialog() {
     BottomSheetScaffold(scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 166.dp,
         sheetBackgroundColor = MaterialTheme.colors.background,
-        sheetContent = { EventView() }) { TopAppBar() }
+        sheetContent = { EventView() }) {
+        Scaffold(topBar = {
+            MapTopBar()
+        })
+        {
+//        ModalBottomSheetLayout(modifier = Modifier.padding(it), sheetState = sheetState, sheetContent = {
+//            EventBottomDialog()
+//        }) {
+            MapViewContainer()
+//        }
+        }
+    }
 
 //    coroutineScope.launch {
 //        bottomSheetScaffoldState.bottomSheetState.collapse()
@@ -84,7 +97,7 @@ fun EventView() {
                     // Date and rating
                     Text(
                         text = "17:00 - 19:00, 04 Dec",
-                        color = MaterialTheme.colors.secondary,
+                        color = MaterialTheme.colors.secondaryVariant,
                         style = MaterialTheme.typography.body2
                     )
                     ComposeStars(
@@ -93,12 +106,13 @@ fun EventView() {
                         numStars = 3,
                         size = 16.dp,
                         padding = 1.dp,
-                        activeColor = MaterialTheme.colors.secondary,
-                        inactiveColor = MaterialTheme.colors.secondaryVariant,
+                        activeColor = MaterialTheme.colors.secondaryVariant,
+                        inactiveColor = Color.LightGray,
                         ratingBarStyle = RatingBarStyle.Normal,
                     )
                 }
                 Text(
+                    color = MaterialTheme.colors.onBackground,
                     modifier = Modifier.height(52.dp),
                     text = "Event Title and there is The Second Line",
                     style = MaterialTheme.typography.h6,
@@ -106,8 +120,9 @@ fun EventView() {
 
                 )
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 4.dp)) {
-                    Icon(Icons.Default.Domain, contentDescription = null)
+                    Icon(Icons.Default.Domain, contentDescription = null, tint = MaterialTheme.colors.onBackground)
                     Text(
+                        color = MaterialTheme.colors.onBackground,
                         modifier = Modifier.padding(start = 8.dp),
                         text = "Conference, Science",
                         style = MaterialTheme.typography.body1,
@@ -134,8 +149,9 @@ fun EventView() {
             }
         }
         Row(modifier = Modifier.padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.LocationCity, contentDescription = null)
+            Icon(Icons.Default.LocationCity, contentDescription = null, tint = MaterialTheme.colors.onBackground)
             Text(
+                color = MaterialTheme.colors.onBackground,
                 text = stringResource(id = R.string.no_address),
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(start = 8.dp)
@@ -143,6 +159,7 @@ fun EventView() {
         }
 //            LazyColumn(content = )
         Text(
+            color = MaterialTheme.colors.onBackground,
             modifier = Modifier.padding(top = 8.dp),
             text = stringResource(id = R.string.mock_description),
             style = MaterialTheme.typography.body2
@@ -152,7 +169,7 @@ fun EventView() {
 
 @ExperimentalMaterialApi
 @Composable
-@Preview
+@Preview(showBackground = true, backgroundColor = 0xFF000051)
 fun EventBottomDialogPreview() {
     MainTheme {
         EventView()

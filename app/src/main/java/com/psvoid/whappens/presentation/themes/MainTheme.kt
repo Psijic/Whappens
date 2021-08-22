@@ -60,6 +60,7 @@ private val lightColors = lightColors(
 
 @Composable
 fun MainTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) =
-    MaterialTheme(colors = if (darkTheme) darkColors else lightColors) {
+//    MaterialTheme(colors = if (darkTheme) darkColors else lightColors) {
+    MaterialTheme(colors = darkColors) {
         content()
     }
