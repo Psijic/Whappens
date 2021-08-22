@@ -58,7 +58,11 @@ fun EventView() {
             Column(
                 modifier = Modifier.padding(start = 8.dp)
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) { // Date and rating
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) { // Date and rating
                     Text(
                         text = "17:00 - 19:00, 04 Dec",
                         color = MaterialTheme.colors.secondary,
@@ -78,7 +82,7 @@ fun EventView() {
                     maxLines = 2
 
                 )
-                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 6.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 4.dp)) {
                     Icon(Icons.Default.Domain, contentDescription = null)
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
@@ -87,7 +91,12 @@ fun EventView() {
                         maxLines = 1
                     )
                 }
-                Row(modifier = Modifier.padding(top = 8.dp)) {
+                Row(
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     Button(onClick = { /*TODO*/ }) {
                         Icon(Icons.Default.FavoriteBorder, contentDescription = null)
 
@@ -110,7 +119,11 @@ fun EventView() {
             )
         }
 //            LazyColumn(content = )
-        Text(modifier = Modifier.padding(top = 8.dp), text = stringResource(id = R.string.mock_description), style = MaterialTheme.typography.body2)
+        Text(
+            modifier = Modifier.padding(top = 8.dp),
+            text = stringResource(id = R.string.mock_description),
+            style = MaterialTheme.typography.body2
+        )
     }
 }
 
