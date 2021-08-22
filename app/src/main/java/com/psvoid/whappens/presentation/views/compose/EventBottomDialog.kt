@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -135,14 +136,14 @@ fun EventView() {
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Button(onClick = { /*TODO*/ }) {
+                    val btnColors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
+                    Button(onClick = { /*TODO*/ }, colors = btnColors) {
                         Icon(Icons.Default.FavoriteBorder, contentDescription = null)
-
                     }
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(onClick = { /*TODO*/ }, colors = btnColors) {
                         Icon(Icons.Default.Today, contentDescription = null)
                     }
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(onClick = { /*TODO*/ }, colors = btnColors) {
                         Icon(Icons.Default.StarBorder, contentDescription = null)
                     }
                 }
